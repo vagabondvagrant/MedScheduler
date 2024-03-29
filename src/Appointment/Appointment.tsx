@@ -1,0 +1,104 @@
+import React, { useState } from 'react';
+
+interface Appointment {
+  date: string;
+  time: string;
+  doctorId: string;
+}
+
+const doctors = [
+  "Dr. Mahnoor Saleem",
+  "Dr. Michael Johnson",
+  "Dr. Sarah Patel",
+  "Dr. David Kim",
+  "Dr. Jennifer Lee",
+  "Dr. Christopher Brown",
+  "Dr. Jessica Garcia",
+  "Dr. Matthew Taylor",
+  "Dr. Samantha Martinez",
+  "Dr. Daniel Anderson"
+];
+
+const AppointmentBooking: React.FC = () => {
+  const [appointment, setAppointment] = useState<Appointment>({
+    date: '',
+    time: '',
+    doctorId: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setAppointment(prevAppointment => ({
+      ...prevAppointment,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Appointment submitted:", appointment);
+    setAppointment({
+      date: '',
+      time: '',
+      doctorId: '',
+    });
+  };
+
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-900 text-white">
+      <div className="max-w-md mx-auto p-8 bg-gray-100 rounded-lg shadow-lg">
+        <h2 className="text-lg font-semibold mb-4 text-gray-900">Book an Appointment</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="date" className="block text-sm font-medium text-gray-900 mb-1">Date:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={appointment.date}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 rounded-md bg-gray-200 text-gray-900 focus:outline-none focus:bg-white focus:border-blue-400"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="time" className="block text-sm font-medium text-gray-900 mb-1">Time:</label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              value={appointment.time}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 rounded-md bg-gray-200 text-gray-900 focus:outline-none focus:bg-white focus:border-blue-400"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="doctor" className="block text-sm font-medium text-gray-900 mb-1">Select Doctor:</label>
+            <select
+              id="doctor"
+              name="doctorId"
+              value={appointment.doctorId}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 rounded-md bg-gray-200 text-gray-900 focus:outline-none focus:bg-white focus:border-blue-400"
+              required
+            >
+              <option value="">Select a doctor</option>
+              {doctors.map((doctor, index) => (
+                <option key={index} value={doctor}>
+                  {doctor}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button type="submit" className="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+            Book Appointment
+          </button>
+        </form>
+        <p className="mt-4 text-sm text-gray-700">Note: This is a placeholder component to demonstrate key features. Actual functionality and design may vary.</p>
+      </div>
+    </div>
+  );
+};
+
+export default AppointmentBooking;
