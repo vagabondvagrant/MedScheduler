@@ -37,10 +37,10 @@ const AppointmentBooking: React.FC = () => {
       time: '',
       doctorId: '',
     });
-    openModal(appointment.doctorId); // Open modal after submitting appointment
+    openModal(appointment.doctorId); 
   };
 
-  const availableSlots = (selectedDate: string, selectedDoctorId: string): string[] => {
+  const availableSlots = (): string[] => {
     return ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM"];
   };
 
@@ -68,7 +68,7 @@ const AppointmentBooking: React.FC = () => {
               name="date"
               value={appointment.date}
               onChange={handleInputChange}
-              min={new Date().toISOString().split('T')[0]} // Ensure future dates only
+              min={new Date().toISOString().split('T')[0]} 
               className="w-full px-3 py-2 rounded-md bg-gray-200 text-gray-900 focus:outline-none focus:bg-white focus:border-blue-400"
               required
             />
@@ -84,7 +84,7 @@ const AppointmentBooking: React.FC = () => {
               required
             >
               <option value="">Select a time</option>
-              {availableSlots(appointment.date, appointment.doctorId).map(slot => (
+              {availableSlots().map(slot => (
                 <option key={slot} value={slot}>{slot}</option>
               ))}
             </select>
@@ -115,11 +115,11 @@ const AppointmentBooking: React.FC = () => {
       </div>
       {modalVisible && selectedDoctor && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-4 ">
-            <h2 className="text-lg font-semibold mb-2 text-black">{selectedDoctor.name}</h2>
-            <p className="text-sm mb-4 text-black">Specialty: {selectedDoctor.specialty}</p>
-            <p className="text-sm mb-4 text-black">Availability: {selectedDoctor.availability.join(', ')}</p>
-            <button onClick={closeModal} className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+          <div className="bg-black rounded-lg p-4 text-white font-bold">
+            <h2 className="text-lg font-semibold mb-2">{selectedDoctor.name}</h2>
+            <p className="text-sm mb-4">Specialty: {selectedDoctor.specialty}</p>
+            <p className="text-sm mb-4">Availability: {selectedDoctor.availability.join(', ')}</p>
+            <button onClick={closeModal} className="bg-white rounded-full text-black font-bold px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
               Close
             </button>
           </div>
