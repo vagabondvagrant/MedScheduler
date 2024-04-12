@@ -37,16 +37,11 @@ const AppointmentBooking: React.FC = () => {
       time: '',
       doctorId: '',
     });
-    setModalVisible(true);
+    openModal(appointment.doctorId); // Open modal after submitting appointment
   };
 
   const availableSlots = (selectedDate: string, selectedDoctorId: string): string[] => {
     return ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM"];
-  };
-
-  const doctorInfo = (doctorId: string) => {
-    const doctor = doctors.find(doc => doc.id === doctorId);
-    return doctor ? `${doctor.name}, ${doctor.specialty}` : '';
   };
 
   const openModal = (doctorId: string) => {
@@ -120,10 +115,10 @@ const AppointmentBooking: React.FC = () => {
       </div>
       {modalVisible && selectedDoctor && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-4">
-            <h2 className="text-lg font-semibold mb-2">{selectedDoctor.name}</h2>
-            <p className="text-sm mb-4">Specialty: {selectedDoctor.specialty}</p>
-            <p className="text-sm mb-4">Availability: {selectedDoctor.availability.join(', ')}</p>
+          <div className="bg-white rounded-lg p-4 ">
+            <h2 className="text-lg font-semibold mb-2 text-black">{selectedDoctor.name}</h2>
+            <p className="text-sm mb-4 text-black">Specialty: {selectedDoctor.specialty}</p>
+            <p className="text-sm mb-4 text-black">Availability: {selectedDoctor.availability.join(', ')}</p>
             <button onClick={closeModal} className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
               Close
             </button>

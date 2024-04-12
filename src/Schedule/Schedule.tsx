@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const DoctorSchedule = () => {
   const [filter, setFilter] = useState('');
-  const [doctorSchedule, setDoctorSchedule] = useState([
+  const doctorSchedule = [
     {
       name: 'Dr. Mahnoor Saleem',
       days: ['Monday', 'Tuesday', 'Thursday'],
@@ -18,9 +18,9 @@ const DoctorSchedule = () => {
       days: ['Monday', 'Wednesday', 'Friday'],
       times: ['8:00 AM - 11:00 AM', '1:00 PM - 4:00 PM']
     }
-  ]);
+  ];
 
-  const handleFilterChange = (e) => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
   };
 
